@@ -85,6 +85,10 @@ spec:
             timeoutSeconds: 3
             periodSeconds: 2
             failureThreshold: 5
+          lifecycle:
+            preStop:
+              exec:
+                command: [ "/bin/aws-fsx-csi-driver", "pre-stop-hook" ]
           {{- with .Values.node.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
